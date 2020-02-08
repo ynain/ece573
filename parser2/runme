@@ -1,0 +1,11 @@
+#! /bin/bash
+
+num_args=$#
+
+if (( num_args != 2 ))
+then
+	echo "Usage: <input file> <output file>";
+	exit 1;
+fi
+
+./lexer $1 | tee $2

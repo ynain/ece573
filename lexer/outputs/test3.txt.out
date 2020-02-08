@@ -1,0 +1,316 @@
+Token Type: KEYWORD
+Value: PROGRAM
+Token Type: IDENTIFER
+Value: fibonacci
+Unrecognized char
+Token Type: KEYWORD
+Value: BEGIN
+Unrecognized char
+Unrecognized char
+Token Type: KEYWORD
+Value: STRING
+Token Type: IDENTIFER
+Value: input
+Token Type: OPERATOR
+Value: :=
+Token Type: STRINGLITERAL
+Value: "Please input an integer number: "
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: KEYWORD
+Value: STRING
+Token Type: IDENTIFER
+Value: space
+Token Type: OPERATOR
+Value: :=
+Token Type: STRINGLITERAL
+Value: " "
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: KEYWORD
+Value: STRING
+Token Type: IDENTIFER
+Value: eol
+Token Type: OPERATOR
+Value: :=
+Token Type: STRINGLITERAL
+Value: "\n"
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Unrecognized char
+Token Type: KEYWORD
+Value: FUNCTION
+Token Type: KEYWORD
+Value: INT
+Token Type: IDENTIFER
+Value: F
+Token Type: OPERATOR
+Value: (
+Token Type: KEYWORD
+Value: INT
+Token Type: IDENTIFER
+Value: n
+Token Type: OPERATOR
+Value: )
+Unrecognized char
+Token Type: KEYWORD
+Value: BEGIN
+Unrecognized char
+Unrecognized char
+Token Type: KEYWORD
+Value: IF
+Token Type: OPERATOR
+Value: (
+Token Type: IDENTIFER
+Value: n
+Token Type: OPERATOR
+Value: >
+Token Type: INTLITERAL
+Value: 2
+Token Type: OPERATOR
+Value: )
+Unrecognized char
+Token Type: KEYWORD
+Value: RETURN
+Token Type: IDENTIFER
+Value: F
+Token Type: OPERATOR
+Value: (
+Token Type: IDENTIFER
+Value: n
+Token Type: OPERATOR
+Value: -
+Token Type: INTLITERAL
+Value: 1
+Token Type: OPERATOR
+Value: )
+Token Type: OPERATOR
+Value: +
+Token Type: IDENTIFER
+Value: F
+Token Type: OPERATOR
+Value: (
+Token Type: IDENTIFER
+Value: n
+Token Type: OPERATOR
+Value: -
+Token Type: INTLITERAL
+Value: 2
+Token Type: OPERATOR
+Value: )
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: KEYWORD
+Value: ELSE
+Unrecognized char
+Token Type: KEYWORD
+Value: IF
+Token Type: OPERATOR
+Value: (
+Token Type: IDENTIFER
+Value: n
+Token Type: OPERATOR
+Value: =
+Token Type: INTLITERAL
+Value: 0
+Token Type: OPERATOR
+Value: )
+Token Type: KEYWORD
+Value: RETURN
+Token Type: INTLITERAL
+Value: 0
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: KEYWORD
+Value: ELSE
+Unrecognized char
+Token Type: KEYWORD
+Value: IF
+Token Type: OPERATOR
+Value: (
+Token Type: IDENTIFER
+Value: n
+Token Type: OPERATOR
+Value: =
+Token Type: INTLITERAL
+Value: 1
+Token Type: OPERATOR
+Value: )
+Unrecognized char
+Token Type: KEYWORD
+Value: RETURN
+Token Type: INTLITERAL
+Value: 1
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: KEYWORD
+Value: ELSE
+Unrecognized char
+Token Type: KEYWORD
+Value: RETURN
+Token Type: INTLITERAL
+Value: 1
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: KEYWORD
+Value: ENDIF
+Unrecognized char
+Token Type: KEYWORD
+Value: ENDIF
+Unrecognized char
+Token Type: KEYWORD
+Value: ENDIF
+Unrecognized char
+Token Type: KEYWORD
+Value: END
+Unrecognized char
+Unrecognized char
+Unrecognized char
+Token Type: KEYWORD
+Value: FUNCTION
+Token Type: KEYWORD
+Value: VOID
+Token Type: IDENTIFER
+Value: main
+Token Type: OPERATOR
+Value: (
+Token Type: OPERATOR
+Value: )
+Unrecognized char
+Token Type: KEYWORD
+Value: BEGIN
+Unrecognized char
+Token Type: KEYWORD
+Value: INT
+Token Type: IDENTIFER
+Value: i
+Token Type: OPERATOR
+Value: ,
+Token Type: IDENTIFER
+Value: end
+Token Type: OPERATOR
+Value: ,
+Token Type: IDENTIFER
+Value: result
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: KEYWORD
+Value: WRITE
+Token Type: OPERATOR
+Value: (
+Token Type: IDENTIFER
+Value: input
+Token Type: OPERATOR
+Value: )
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: KEYWORD
+Value: READ
+Token Type: OPERATOR
+Value: (
+Token Type: IDENTIFER
+Value: end
+Token Type: OPERATOR
+Value: )
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Unrecognized char
+Token Type: IDENTIFER
+Value: i
+Token Type: OPERATOR
+Value: :=
+Token Type: INTLITERAL
+Value: 0
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: KEYWORD
+Value: WHILE
+Token Type: OPERATOR
+Value: (
+Token Type: IDENTIFER
+Value: i
+Token Type: OPERATOR
+Value: !=
+Token Type: IDENTIFER
+Value: end
+Token Type: OPERATOR
+Value: )
+Unrecognized char
+Token Type: IDENTIFER
+Value: result
+Token Type: OPERATOR
+Value: :=
+Token Type: IDENTIFER
+Value: F
+Token Type: OPERATOR
+Value: (
+Token Type: IDENTIFER
+Value: i
+Token Type: OPERATOR
+Value: )
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: KEYWORD
+Value: WRITE
+Token Type: OPERATOR
+Value: (
+Token Type: IDENTIFER
+Value: i
+Token Type: OPERATOR
+Value: ,
+Token Type: IDENTIFER
+Value: space
+Token Type: OPERATOR
+Value: )
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: KEYWORD
+Value: WRITE
+Token Type: OPERATOR
+Value: (
+Token Type: IDENTIFER
+Value: result
+Token Type: OPERATOR
+Value: ,
+Token Type: IDENTIFER
+Value: eol
+Token Type: OPERATOR
+Value: )
+Token Type: OPERATOR
+Value: ;
+Unrecognized char
+Token Type: IDENTIFER
+Value: i
+Token Type: OPERATOR
+Value: :=
+Token Type: IDENTIFER
+Value: i
+Token Type: OPERATOR
+Value: +
+Token Type: INTLITERAL
+Value: 1
+Unrecognized char
+Token Type: KEYWORD
+Value: ENDWHILE
+Unrecognized char
+Unrecognized char
+Token Type: KEYWORD
+Value: END
+Unrecognized char
+Unrecognized char
+Token Type: KEYWORD
+Value: END
+Unrecognized char

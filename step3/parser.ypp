@@ -1,0 +1,329 @@
+%{
+    #include "types.h"
+
+    #include<stdio.h>
+    #include<stdlib.h>
+    #include<iostream>
+    #include<string>
+
+
+
+
+    #ifndef DEBUG
+        void dbgprint(const char* fmt, ...) {} // get rid of printf
+    #else
+        #define dbgprint printf
+    #endif
+
+
+    int yylex();
+    extern char* yytext;
+    extern int yylineno;
+    void yyerror(const char*);
+%}
+
+%union {
+    StringEntry * se;
+    NumericEntry * ne;
+    std::string * name;
+    idList * names;
+	int token;
+}
+
+%token INTLITERAL
+%token FLOATLITERAL
+%token STRINGLITERAL
+%token KEYWORD
+%token OPERATOR
+%token IDENTIFIER
+%token PROGRAM
+%token _BEGIN
+%token END
+%token FUNCTION
+%token READ
+%token WRITE
+%token IF
+%token ELSE
+%token ENDIF
+%token WHILE
+%token ENDWHILE
+%token RETURN
+%token INT
+%token VOID
+%token STRING
+%token FLOAT
+%token TRUE
+%token FALSE
+%token FOR
+%token ENDFOR
+%token CONTINUE
+%token BREAK
+%token ASSIGN
+%token NEQ
+%token GEQ
+%token LEQ
+
+%error-verbose
+%define parse.lac full
+
+%type <name> id str
+%type <names> id_list id_tail
+%type <token> var_type
+
+%%
+
+program:
+    PROGRAM id _BEGIN {startBlock("GLOBAL");} body END { endBlock(); showAllTables(); return 0; }
+    ;
+
+id:
+    IDENTIFIER
+    ;
+
+body:
+    decl funcs_decl
+    ;
+
+decl:
+    string_decl decl {
+        // std::cout << "Variable declaration: " << $1->name << " = \"" << $1->value << "\"\n";
+        dbgprint("String var\n");
+    }
+    | var_decl decl { dbgprint("Other var\n"); }
+    | %empty
+    ;
+
+
+string_decl:
+    STRING id ASSIGN str ';' {
+        // $$ = new StringEntry(*$2, *$4);
+		scope.top()->addStringEntry(*$2, *$4);
+    }
+    ;
+
+str:
+    STRINGLITERAL
+    ;
+
+
+var_decl:
+    var_type id_list ';' {
+		scope.top()->addEntry(makeEntries($2, $1 == INT));
+	}
+    ;
+
+var_type:
+    FLOAT
+    | INT
+    ;
+
+any_type:
+    var_type
+    | VOID
+    ;
+
+id_list:
+    id id_tail {
+        $$ = new idList();
+        $$->name = *$1;
+        $$->next = $2;
+    }
+    ;
+
+id_tail:
+    ',' id id_tail {$$ = new idList(); $$->name = *$2; $$->next = $3; }
+    | %empty {$$ = NULL; }
+    ;
+
+
+param_decl_list:
+	param_decl param_decl_tail
+	| %empty
+	;
+
+param_decl:
+	var_type id { scope.top()->addNumericEntry(*$2, $1 == INT); }
+	;
+
+param_decl_tail:
+	',' param_decl param_decl_tail
+	| %empty
+	;
+
+funcs_decl:
+    func_decl funcs_decl
+    | %empty
+    ;
+
+func_decl:
+	FUNCTION any_type id { startBlock("FUNCTION " + *$3); } '(' param_decl_list ')' _BEGIN func_body END { endBlock(); dbgprint("Made a function\n"); }
+	;
+
+func_body:
+	decl stmt_list
+	;
+
+stmt_list:
+	stmt stmt_list
+	| %empty
+	;
+
+stmt:
+	base_stmt
+	| if_stmt
+	| loop_stmt
+	;
+
+base_stmt:
+	assign_stmt { dbgprint("Made assignment\n"); }
+	| read_stmt { dbgprint("Read var\n"); }
+	| write_stmt { dbgprint("Write var\n"); }
+	| control_stmt
+	;
+
+assign_stmt:
+	assign_expr ';'
+	;
+
+assign_expr:
+	id ASSIGN expr
+	;
+
+read_stmt:
+	READ '(' id_list ')' ';'
+	;
+
+write_stmt:
+	WRITE '('id_list ')' ';'
+	;
+
+return_stmt:
+	RETURN expr ';'
+	;
+
+/* Expressions */
+expr: { dbgprint("Made expr\n"); }
+	expr_prefix factor
+	;
+
+expr_prefix:
+	expr_prefix factor addop
+	| %empty
+	;
+
+factor:
+	factor_prefix postfix_expr
+	;
+
+factor_prefix:
+	factor_prefix postfix_expr mulop
+	| %empty
+	;
+
+postfix_expr:
+	primary
+	| call_expr
+	;
+
+call_expr:
+	id '(' expr_list ')'
+    ;
+
+expr_list:
+	expr expr_list_tail
+	| %empty
+	;
+
+expr_list_tail:
+	',' expr expr_list_tail
+	| %empty
+	;
+
+primary:
+	'(' expr ')'
+	| id
+	| INTLITERAL
+	| FLOATLITERAL
+	;
+
+addop:
+	'+'
+	| '-'
+	;
+
+mulop:
+	'*'
+	| '/'
+	;
+
+/* Complex Statements and Condition */
+if_stmt:
+	IF '(' cond ')' { startBlock(nextBlock()); } decl stmt_list { endBlock(); } else_part ENDIF
+    ;
+else_part:
+	ELSE { startBlock(nextBlock()); } decl stmt_list { endBlock(); }
+	| %empty
+	;
+
+cond:
+	expr compop expr
+	| TRUE
+	| FALSE
+	;
+
+compop:
+	'<'
+	| '>'
+	| '='
+	| NEQ
+	| LEQ
+	| GEQ
+	;
+
+while_stmt:
+	WHILE '(' cond ')' { startBlock(nextBlock()); } decl stmt_list { endBlock(); }ENDWHILE
+    ;
+
+control_stmt:
+	return_stmt
+	| CONTINUE ';'
+	| BREAK ';'
+	;
+
+loop_stmt:
+	while_stmt
+	| for_stmt
+	;
+
+init_stmt:
+	assign_expr
+	| %empty
+	;
+
+incr_stmt:
+	assign_expr
+	| %empty
+	;
+
+for_stmt:
+	FOR '('
+	init_stmt ';'
+	cond ';'
+	incr_stmt
+	')'
+	decl stmt_list ENDFOR
+
+%%
+
+int yywrap(void)
+{
+    return 1;
+}
+
+void yyerror(const char* s)
+{
+    printf("Not Accepted\n");
+    dbgprint("Error: %s\n", s);
+    dbgprint("Token yytext = %s on line %d\n", yytext, yylineno);
+    exit(-1);
+}

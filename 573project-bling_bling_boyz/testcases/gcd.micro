@@ -1,0 +1,26 @@
+PROGRAM funcs
+BEGIN
+    STRING p1 := "Enter a number: "
+    STRING p2 := "Enter another number: ";
+    FUNCTION INT gcd(INT a, INT b)
+    BEGIN
+        INT temp;
+        WHILE (b != 0)
+            temp := b;
+            b := a - b;
+            a := temp;
+        ENDWHILE
+        RETURN a;
+    END
+
+    FUNCTION VOID main()
+    BEGIN
+        INT x, y, z;
+        WRITE(p1);
+        READ(x);
+        WRITE(p2);
+        READ(y);
+        z := gcd(x, y);
+        WRITE(z);
+    END
+END

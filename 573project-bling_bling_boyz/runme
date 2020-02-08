@@ -1,0 +1,32 @@
+#!/bin/bash
+
+phase=5
+
+num_args=$#
+
+if (( num_args != 2 ))
+then
+	echo "Usage: <input file> <output file>";
+	exit 1;
+fi
+
+case $phase in
+1)
+    ./lexer $1 | tee $2
+    ;;
+2)
+    cat $1 | ./parser | tee $2
+    ;;
+3)
+    cat $1 | ./symbols | tee $2
+    ;;
+4)
+    ./compiler $1 | tee $2
+    ;;
+5)
+    ./compiler $1 | tee $2
+    ;;
+*)
+    echo "Idk how to run phase $phase yet!";
+    ;;
+esac

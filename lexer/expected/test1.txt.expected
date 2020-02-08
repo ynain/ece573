@@ -1,0 +1,22 @@
+Token Type: INTLITERAL
+Value: 2
+Token Type: OPERATOR
+Value: +
+Token Type: INTLITERAL
+Value: 2
+Token Type: OPERATOR
+Value: =
+Token Type: INTLITERAL
+Value: 4
+Token Type: OPERATOR
+Value: -
+Token Type: INTLITERAL
+Value: 1
+Token Type: OPERATOR
+Value: =
+Token Type: INTLITERAL
+Value: 3
+Token Type: IDENTIFIER
+Value: quick
+Token Type: IDENTIFIER
+Value: maths

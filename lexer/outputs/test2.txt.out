@@ -1,0 +1,10 @@
+Token Type: IDENTIFER
+Value: A
+Token Type: OPERATOR
+Value: :=
+Token Type: IDENTIFER
+Value: B
+Token Type: OPERATOR
+Value: +
+Token Type: INTLITERAL
+Value: 4
